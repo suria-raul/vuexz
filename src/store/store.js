@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store(
   {
+    strict: true,
     state: {
       products: [
         {name: 'Banana Skin', price: 20},
@@ -14,7 +15,7 @@ const store = new Vuex.Store(
       ]
     },
     getters: {
-      saleProducts: state => {
+      saleProducts(state) {
         return state.products.map(product => {
           return {
             name: '**' + product.name + '**',
@@ -24,10 +25,18 @@ const store = new Vuex.Store(
       }
     },
     mutations: {
-      reducePrice: state => {
+      reducePrice(state, payload) {
         state.products.forEach(product => {
           product.price -= 1
         })
+      }
+    },
+    actions: {
+      reducePrice(context, payload) {
+        setTimeout(function () {
+          context.commit('reducePrice')
+          console.log(payload)
+        }, 2000)
       }
     }
   }

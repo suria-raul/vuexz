@@ -10,8 +10,8 @@ export default {
     }
   },
   methods: {
-    reducePrice() {
-      this.$store.commit('reducePrice')
+    reducePrice(wsome) {
+      this.$store.dispatch('reducePrice', wsome)
     }
   }
 }
@@ -27,7 +27,7 @@ export default {
         <span class="price">${{ product.price }}</span>
       </li>
     </ul>
-    <button @click="reducePrice">
+    <button @click="reducePrice('wsome')">
       Reduce price
     </button>
   </div>
